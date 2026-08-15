@@ -85,9 +85,14 @@ export default function Home() {
   }, [currentTime, transcript]);
   const activeTranscript = transcript[activeTranscriptIndex];
 
+  const hasStarted = isPlaying || currentTime > 0;
   const revealedNodes = useMemo(
-    () => new Set(nodes.filter((node) => currentTime >= node.firstSeen).map((node) => node.id)),
-    [currentTime],
+    () => new Set(
+      nodes
+        .filter((node) => (node.firstSeen === 0 ? hasStarted : currentTime >= node.firstSeen))
+        .map((node) => node.id),
+    ),
+    [currentTime, hasStarted],
   );
   const revealedConnections = useMemo(
     () => connections.filter((connection) => currentTime >= connection.revealAt),
@@ -198,7 +203,7 @@ export default function Home() {
             <span><small>THE STORY BEGINS</small><strong>1763</strong></span>
           </div>
           <h1>What could Pepsi, videotape, and vodka possibly have in common?</h1>
-          <p>Press play and watch Dan R. Morris’s answer assemble itself—one illustrated person, object, date, journey, and hidden connection at a time.</p>
+          <p>Press play and watch Dan R. Morris’s answer assemble itself—every illustration begins as a faint watermark, then color and connections arrive as Dan tells the story.</p>
           <button onClick={() => { seek(0); togglePlay(); }}>{isPlaying ? "PAUSE THE STORY" : "PLAY & BUILD THE PATH"} <b>{isPlaying ? "Ⅱ" : "▶"}</b></button>
         </div>
         <aside><img src="dan-r-morris.png" alt="Dan R. Morris" /><span>TOLD BY</span><strong>Dan R. Morris</strong><small>Award-winning storyteller and host of Tracing The Path</small></aside>
@@ -223,7 +228,7 @@ export default function Home() {
 
         <section ref={mapPanelRef} className="map-panel" aria-label="Animated story connection map">
           <HistoricalTimeline activeIndex={activeIndex} />
-          <div className="map-heading"><span>THE PATH ASSEMBLES AS DAN TELLS IT</span><div className="drawing-status"><i />{isPlaying ? "ADDING TO THE PATH" : "PRESS PLAY TO BUILD"}</div><small>{revealedNodes.size}/{nodes.length} illustrations · {revealedConnections.length}/{connections.length} links</small></div>
+          <div className="map-heading"><span>THE WHOLE PATH IS HERE—DAN REVEALS ITS MEANING</span><div className="drawing-status"><i />{isPlaying ? "BRINGING THE PATH TO LIFE" : "PRESS PLAY TO REVEAL"}</div><small>{nodes.length} watermark illustrations · {revealedConnections.length}/{connections.length} links</small></div>
           <div className="map-canvas">
             <div className="paper-grid" />
             {connections.map((connection, index) => {
@@ -251,10 +256,11 @@ export default function Home() {
               return (
                 <button
                   key={node.id}
-                  className={`map-node node-${node.id} ${node.kind} ${revealed ? "revealed" : ""} ${active ? "active" : ""}`}
+                  className={`map-node node-${node.id} ${node.kind} ${revealed ? "revealed" : "watermark"} ${active ? "active" : ""}`}
                   style={{ left: `${node.x}%`, top: `${node.y}%`, "--draw-delay": `${(nodeIndex % 4) * 90}ms` } as React.CSSProperties}
                   onClick={() => revealed && setSelectedNode(node.id === selectedNode ? null : node.id)}
-                  aria-label={`${node.label}, ${node.historicalDate}`}
+                  disabled={!revealed}
+                  aria-label={revealed ? `${node.label}, ${node.historicalDate}` : `${node.label} is waiting to be introduced`}
                 >
                   <span className="sketch-frame"><img src={node.image} alt="" loading="lazy" decoding="async" /><i className="hatch h1" /><i className="hatch h2" /><i className="hatch h3" /><span className="pencil-tip">✎</span></span>
                   <strong>{node.label}</strong>
@@ -268,7 +274,7 @@ export default function Home() {
             })()}
           </div>
           {focusedConnection && !selectedNode && <button className="connection-detail" onClick={() => seek(focusedConnection.revealAt, true)}><span>LATEST CONNECTION</span><strong>{focusedConnection.label}</strong><p>{focusedConnection.explanation}</p><b>REPLAY AT {formatTime(focusedConnection.revealAt)} ▶</b></button>}
-          <div className="map-legend"><small>Illustrations stay in place for spatial memory. Select any image or revealed line to hear its explanation.</small></div>
+          <div className="map-legend"><small>Faint illustrations show the whole path ahead. Color and connections arrive with Dan’s narration; select any revealed image or line to hear its explanation.</small></div>
         </section>
       </section>
 
@@ -316,7 +322,7 @@ export default function Home() {
 
       <footer><span>TRACING THE PATH</span><p>Hosted by Dan R. Morris · Everyday things. Extraordinary connections.</p><a href="https://podcasts.apple.com/us/podcast/tracing-the-path-the-connected-20th-century/id1476334630" target="_blank" rel="noreferrer">VIEW ON APPLE PODCASTS ↗</a></footer>
 
-      {showGuide && <div className="modal-backdrop" role="button" tabIndex={0} aria-label="Close exploration guide" onKeyDown={(event) => { if (event.key === "Escape" || event.key === "Enter") setShowGuide(false); }} onClick={(event) => { if (event.target === event.currentTarget) setShowGuide(false); }}><div className="guide-modal" role="dialog" aria-modal="true" aria-labelledby="guide-title"><button onClick={() => setShowGuide(false)} aria-label="Close guide">×</button><span>HOW TO EXPLORE</span><h2 id="guide-title">Hear it. See it. Follow it.</h2><ol><li><b>01</b><p><strong>Press play</strong>Illustrations appear only when Dan introduces them.</p></li><li><b>02</b><p><strong>Watch history time</strong>The upper timeline jumps backward and forward independently of the audio scrubber.</p></li><li><b>03</b><p><strong>Select the map</strong>Every illustration and connection can replay its own explanation.</p></li><li><b>04</b><p><strong>Open the transcript</strong>Follow, search visually, or jump from any timestamp.</p></li></ol><button className="start-button" onClick={() => { setShowGuide(false); seek(0, true); }}>START THE EPISODE →</button></div></div>}
+      {showGuide && <div className="modal-backdrop" role="button" tabIndex={0} aria-label="Close exploration guide" onKeyDown={(event) => { if (event.key === "Escape" || event.key === "Enter") setShowGuide(false); }} onClick={(event) => { if (event.target === event.currentTarget) setShowGuide(false); }}><div className="guide-modal" role="dialog" aria-modal="true" aria-labelledby="guide-title"><button onClick={() => setShowGuide(false)} aria-label="Close guide">×</button><span>HOW TO EXPLORE</span><h2 id="guide-title">Hear it. See it. Follow it.</h2><ol><li><b>01</b><p><strong>Press play</strong>Faint illustrations are already waiting; color arrives when Dan introduces them.</p></li><li><b>02</b><p><strong>Watch history time</strong>The upper timeline jumps backward and forward independently of the audio scrubber.</p></li><li><b>03</b><p><strong>Select the map</strong>Every illustration and connection can replay its own explanation.</p></li><li><b>04</b><p><strong>Open the transcript</strong>Follow, search visually, or jump from any timestamp.</p></li></ol><button className="start-button" onClick={() => { setShowGuide(false); seek(0, true); }}>START THE EPISODE →</button></div></div>}
     </main>
   );
 }
