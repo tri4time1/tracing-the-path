@@ -122,8 +122,11 @@ button:focus-visible,a:focus-visible,select:focus-visible,input:focus-visible { 
 .connection.active:after { content:"✎"; position:absolute; right:-7px; top:-13px; color:var(--red); font-size:16px; animation:pencilTravel 1.05s ease-out both; }
 @keyframes drawConnection { from { transform:scaleX(0); } to { transform:scaleX(1); } }
 @keyframes pencilTravel { from { right:100%; opacity:1; } to { right:-7px; opacity:0; } }
-.map-node { position:absolute; transform:translate(-50%,-50%) scale(.72) rotate(-2deg); min-width:116px; border:0; background:none; text-align:center; padding:0; opacity:0; visibility:hidden; z-index:3; cursor:default; }
+.map-node { position:absolute; transform:translate(-50%,-50%) scale(.72) rotate(-2deg); min-width:116px; border:0; background:none; text-align:center; padding:0; opacity:.15; visibility:visible; z-index:3; cursor:default; transition:opacity .45s ease,filter .45s ease; }
 .map-node:nth-of-type(even) { transform:translate(-50%,-50%) scale(.72) rotate(2deg); }
+.map-node.watermark { filter:grayscale(1) sepia(.35) saturate(.45); }
+.map-node.watermark .sketch-frame { border-color:rgba(23,25,26,.48); box-shadow:none; }
+.map-node.watermark strong,.map-node.watermark small { background:rgba(242,232,212,.7); color:rgba(23,25,26,.62); }
 .map-node.revealed,.map-node:nth-of-type(even).revealed { opacity:1; visibility:visible; transform:translate(-50%,-50%) scale(1) rotate(-1deg); cursor:pointer; animation:nodeLand .48s cubic-bezier(.18,.85,.3,1.2) var(--draw-delay) both; }
 @keyframes nodeLand { from { opacity:0; transform:translate(-50%,-50%) scale(.72) rotate(-5deg); } }
 .sketch-frame { width:88px; height:76px; margin:0 auto 7px; display:grid; place-items:center; position:relative; overflow:hidden; background:#ead7b5; border:2px solid var(--ink); border-radius:48% 52% 46% 54% / 52% 44% 56% 48%; box-shadow:3px 4px 0 rgba(38,59,71,.18); transition:.3s ease; }
@@ -133,6 +136,7 @@ button:focus-visible,a:focus-visible,select:focus-visible,input:focus-visible { 
 .sketch-frame:after { content:""; position:absolute; inset:-5px; background:linear-gradient(102deg,transparent 0 12%,rgba(244,234,214,.94) 18% 25%,transparent 31% 44%,rgba(244,234,214,.9) 51% 58%,transparent 66%); transform:translateX(110%); }
 .map-node.revealed .sketch-frame { animation:inkFrame .82s steps(8,end) var(--draw-delay) both; }
 .map-node.revealed .sketch-frame:after { animation:sketchSweep 1.05s steps(8,end) var(--draw-delay) both; }
+.map-node:disabled { cursor:default; }
 @keyframes inkFrame { from { clip-path:polygon(0 0,0 0,0 100%,0 100%); filter:contrast(1.5); } to { clip-path:polygon(0 0,100% 0,100% 100%,0 100%); filter:contrast(1); } }
 @keyframes sketchSweep { from { transform:translateX(-115%); } to { transform:translateX(115%); } }
 .sketch-frame img { width:100%; height:100%; object-fit:cover; filter:contrast(1.08) saturate(.82); mix-blend-mode:multiply; }
