@@ -20,3 +20,5 @@ body {
   background: var(--ttp-paper);
   color: var(--ttp-ink);
 }
+
+/* Staging deployment connection verified via GitHub Actions. */
