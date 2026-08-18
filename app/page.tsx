@@ -13,6 +13,27 @@ import {
 type TranscriptSegment = { id: number; start: number; end: number; text: string };
 type TranscriptDocument = { segments: TranscriptSegment[]; reviewStatus: string };
 
+const storyCanvasClusters = [
+  { id: "trade", title: "THE LONG COMMERCIAL PRELUDE", x: 3, y: 4, width: 29, height: 29 },
+  { id: "technology", title: "A TECHNOLOGY CROSSES BORDERS", x: 36, y: 4, width: 28, height: 29 },
+  { id: "pepsi", title: "A DRINK BECOMES A BRIDGE", x: 68, y: 4, width: 29, height: 35 },
+  { id: "kitchen", title: "THE STORY CONVERGES IN MOSCOW", x: 4, y: 40, width: 38, height: 33 },
+  { id: "afterlife", title: "THE DEAL'S AFTERLIFE", x: 47, y: 56, width: 49, height: 34 },
+] as const;
+
+const storyCanvasPositions: Record<string, { x: number; y: number }> = {
+  empire: { x: 9, y: 15 }, catherine: { x: 18, y: 15 }, fleet1863: { x: 27, y: 15 },
+  singer: { x: 13, y: 28 }, lenin: { x: 24, y: 28 },
+  newsreels: { x: 42, y: 16 }, poniatoff: { x: 51, y: 16 }, magnetophon: { x: 60, y: 16 },
+  ampex: { x: 51, y: 29 },
+  bradham: { x: 73, y: 16 }, pepsi: { x: 84, y: 15 }, kendall: { x: 93, y: 18 },
+  vodka: { x: 83, y: 31 },
+  exchange: { x: 12, y: 52 }, exhibition: { x: 28, y: 52 },
+  nixon: { x: 14, y: 66 }, khrushchev: { x: 29, y: 66 },
+  fleet: { x: 57, y: 68 }, collapse: { x: 70, y: 68 }, putin: { x: 85, y: 68 },
+  harrier: { x: 71, y: 83 },
+};
+
 function formatTime(seconds: number) {
   const mins = Math.floor(seconds / 60);
   const secs = Math.floor(seconds % 60);
@@ -104,7 +125,7 @@ export default function Home() {
       ...node,
       x: [17, 50, 83][index % 3],
       y: 7 + Math.floor(index / 3) * 14,
-    } : node),
+    } : { ...node, ...storyCanvasPositions[node.id] }),
     [isCompactMap],
   );
   useEffect(() => {
@@ -199,6 +220,13 @@ export default function Home() {
           <div className="map-heading"><span><b>NOW TRACING</b>{activeBeat.year} · {activeBeat.title}</span><div className="drawing-status"><i />{isPlaying ? "BRINGING THE PATH TO LIFE" : "PRESS PLAY TO REVEAL"}</div><small>{nodes.length} watermark illustrations · {revealedConnections.length}/{connections.length} links</small></div>
           <div className="map-canvas">
             <div className="paper-grid" />
+            {storyCanvasClusters.map((cluster) => (
+              <div
+                className={`story-cluster cluster-${cluster.id}`}
+                key={cluster.id}
+                style={{ left: `${cluster.x}%`, top: `${cluster.y}%`, width: `${cluster.width}%`, height: `${cluster.height}%` }}
+              ><span>{cluster.title}</span></div>
+            ))}
             {connections.map((connection, index) => {
               const start = positionedNodes.find((node) => node.id === connection.from)!;
               const end = positionedNodes.find((node) => node.id === connection.to)!;
