@@ -24,7 +24,6 @@ const relatedEpisodePlaceholders = [
   { connection: "SHARED PRODUCT", title: "A related episode title", description: "Each connection will be selected and explained during editorial review.", action: "EXPLORE EPISODE" },
   { connection: "SHARED COMPANY", title: "A related episode title", description: "Listeners will be able to continue along a specific, meaningful path.", action: "EXPLORE EPISODE" },
   { connection: "SHARED EVENT", title: "A related episode title", description: "This space will never recommend an episode without an explicit connection.", action: "EXPLORE EPISODE" },
-  { connection: "SHARED IDEA", title: "A related episode title", description: "Future cards will use their own episode artwork and destination link.", action: "EXPLORE EPISODE" },
 ] as const;
 
 
