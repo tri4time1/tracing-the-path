@@ -247,6 +247,21 @@ button:focus-visible,a:focus-visible,select:focus-visible,input:focus-visible { 
 .final-map h2 { font:400 clamp(42px,5vw,72px)/.98 Georgia,serif; letter-spacing:-.04em; margin:16px auto 22px; max-width:900px; }
 .final-map p { font:400 19px/1.6 Georgia,serif; max-width:760px; margin:0 auto; color:#55554f; }
 .final-map button { margin-top:30px; background:var(--ink); color:var(--cream); border:0; padding:16px 20px; font-size:11px; letter-spacing:.11em; cursor:pointer; box-shadow:5px 5px 0 var(--red); }
+.related-episodes { padding:92px 6vw 108px; background:#dfc499; border-top:2px solid var(--ink); }
+.related-episodes-intro { display:grid; grid-template-columns:minmax(0,1fr) minmax(280px,.8fr); gap:18px 8vw; align-items:end; margin-bottom:40px; }
+.related-episodes-intro>span { grid-column:1/-1; color:var(--red); font-size:11px; letter-spacing:.18em; font-weight:800; }
+.related-episodes h2 { margin:0; font:400 clamp(42px,5vw,70px)/.96 Georgia,serif; letter-spacing:-.04em; }
+.related-episodes-intro p { margin:0; color:#4f504a; font:400 18px/1.55 Georgia,serif; }
+.related-episode-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); border:1px solid var(--ink); background:var(--ink); gap:1px; }
+.related-episode-card { display:grid; grid-template-columns:112px minmax(0,1fr); gap:18px; min-height:220px; padding:21px; background:var(--cream); }
+.related-episode-art { position:relative; align-self:start; }
+.related-episode-art img { width:100%; aspect-ratio:1; display:block; object-fit:cover; border:2px solid var(--ink); box-shadow:4px 5px 0 rgba(159,59,37,.38); filter:grayscale(.35) sepia(.2); }
+.related-episode-art span { position:absolute; top:-9px; left:-8px; padding:4px 6px; background:var(--red); color:var(--cream); font-size:9px; font-weight:800; letter-spacing:.1em; }
+.related-episode-card small { color:var(--red); font-size:10px; font-weight:800; letter-spacing:.14em; }
+.related-episode-card h3 { margin:9px 0 9px; font:500 22px/1.05 Georgia,serif; }
+.related-episode-card p { margin:0; color:#585950; font:400 14px/1.45 Georgia,serif; }
+.related-episode-link { display:block; margin-top:17px; font-size:10px; letter-spacing:.11em; font-weight:800; }
+.related-episode-link b { color:var(--red); margin-left:7px; font-size:15px; }
 .host-feature { min-height:610px; display:grid; grid-template-columns:minmax(300px,1.1fr) minmax(320px,1fr) 250px; background:var(--blue); color:var(--cream); align-items:stretch; }
 .host-photo-wrap { min-height:610px; overflow:hidden; position:relative; background:#0f171b; }
 .host-photo-wrap img { width:100%; height:100%; object-fit:cover; object-position:72% center; filter:sepia(.18) contrast(1.05); }
@@ -289,6 +304,7 @@ footer a { margin-left:auto; color:var(--ink); font-size:11px; letter-spacing:.1
   .host-chip { display:none; }
   .topbar { grid-template-columns:1fr auto; }
   .chapter-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .related-episode-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
   .map-node { min-width:100px; }
   .map-node strong { font-size:13px; }
   .connection-detail { grid-template-columns:130px minmax(170px,.7fr) 1fr; }
@@ -379,6 +395,12 @@ footer a { margin-left:auto; color:var(--ink); font-size:11px; letter-spacing:.1
   .journey { display:block; padding:65px 24px 90px; }
   .journey-lede { font-size:18px; margin-top:20px; }
   .chapter-grid { display:flex; gap:12px; overflow-x:auto; scroll-snap-type:x mandatory; background:transparent; border:0; margin:34px -24px 0 0; padding:0 24px 16px 0; }
+  .related-episodes { padding:68px 24px 76px; }
+  .related-episodes-intro { display:block; margin-bottom:30px; }
+  .related-episodes-intro>span { display:block; margin-bottom:13px; }
+  .related-episodes-intro p { margin-top:18px; font-size:17px; }
+  .related-episode-grid { grid-template-columns:1fr; }
+  .related-episode-card { min-height:0; }
   .chapter-card { flex:0 0 min(84vw,355px); min-height:430px; border:1px solid var(--ink); scroll-snap-align:start; }
   .final-map { padding:70px 24px; }
   .host-photo-wrap { min-height:430px; }
