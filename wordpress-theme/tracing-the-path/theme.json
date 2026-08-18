@@ -1,0 +1,15 @@
+{
+  "$schema": "https://schemas.wp.org/wp/6.6/theme.json",
+  "version": 3,
+  "settings": {
+    "appearanceTools": true,
+    "color": {
+      "palette": [
+        { "slug": "ink", "color": "#1e2522", "name": "Ink" },
+        { "slug": "paper", "color": "#ffffff", "name": "Paper" },
+        { "slug": "warm-paper", "color": "#f3e5cd", "name": "Warm Paper" },
+        { "slug": "rust", "color": "#aa3e23", "name": "Rust" }
+      ]
+    }
+  }
+}
