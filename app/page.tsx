@@ -184,7 +184,7 @@ export default function Home() {
           <p>Press play and watch Dan R. Morris’s answer assemble itself—every illustration begins as a faint watermark, then color and connections arrive as Dan tells the story.</p>
           <button onClick={() => { seek(0); togglePlay(); }}>{isPlaying ? "PAUSE THE STORY" : "PLAY & BUILD THE PATH"} <b>{isPlaying ? "Ⅱ" : "▶"}</b></button>
         </div>
-        <aside><img src="dan-r-morris.png" alt="Dan R. Morris" /><span>TOLD BY</span><strong>Dan R. Morris</strong><small>Award-winning storyteller and host of Tracing The Path</small></aside>
+        <aside><img src="dan-r-morris.png" alt="Dan R. Morris" /><span>TOLD BY</span><strong>Dan R. Morris</strong><small>Award-winning storyteller and host of Tracing The Path</small><nav className="subscribe-links" aria-label="Subscribe to Tracing The Path"><span>LISTEN &amp; SUBSCRIBE</span><div><a href="https://podcasts.apple.com/us/podcast/tracing-the-path-the-connected-20th-century/id1476334630" target="_blank" rel="noreferrer">APPLE PODCASTS</a><a href="https://open.spotify.com/show/0N4MXj7uoVxBxqlA0y4z7e" target="_blank" rel="noreferrer">SPOTIFY</a><a href="https://music.amazon.com/podcasts/693bff58-61f1-46f3-b40a-3090fbe9bf38/tracing-the-path" target="_blank" rel="noreferrer">AMAZON MUSIC</a></div></nav></aside>
       </section>
 
       <section className="experience">
@@ -278,8 +278,6 @@ export default function Home() {
           })}
         </div>
       </section>
-
-      <section className="final-map"><span>WHEN THE LAST CONNECTION APPEARS</span><h2>The episode becomes a map you can replay.</h2><p>People, products, political systems, inventions, and borders remain connected in one accumulated view. Return to any illustration or line to hear how Dan introduced it.</p><button onClick={() => { seek(DURATION - 3); mapPanelRef.current?.scrollIntoView({ behavior: "smooth" }); }}>REVEAL THE COMPLETED PATH ↑</button></section>
 
       <section className="host-feature">
         <div className="host-photo-wrap"><img src="dan-r-morris.png" alt="Dan R. Morris, host of Tracing The Path" /><span>YOUR STORYTELLER</span></div>
