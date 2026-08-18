@@ -16,7 +16,6 @@ jobs:
       FTP_HOST: ${{ secrets.TTP_STAGING_FTP_HOST }}
       FTP_USERNAME: ${{ secrets.TTP_STAGING_FTP_USERNAME }}
       FTP_PASSWORD: ${{ secrets.TTP_STAGING_FTP_PASSWORD }}
-    if: ${{ env.FTP_HOST != '' && env.FTP_USERNAME != '' && env.FTP_PASSWORD != '' }}
     steps:
       - name: Check out source
         uses: actions/checkout@v4
