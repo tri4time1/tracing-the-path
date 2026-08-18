@@ -19,12 +19,12 @@ const storyCanvasClusters = [
 ] as const;
 
 const relatedEpisodePlaceholders = [
-  { connection: "SHARED PERSON", title: "A related episode title", description: "A short explanation of the shared person, product, company, or event will live here." },
-  { connection: "SHARED PRODUCT", title: "A related episode title", description: "Each connection will be selected and explained during editorial review." },
-  { connection: "SHARED COMPANY", title: "A related episode title", description: "Listeners will be able to continue along a specific, meaningful path." },
-  { connection: "SHARED EVENT", title: "A related episode title", description: "This space will never recommend an episode without an explicit connection." },
-  { connection: "SHARED IDEA", title: "A related episode title", description: "Future cards will use their own episode artwork and destination link." },
-  { connection: "SHARED MOMENT", title: "A related episode title", description: "The final selection can remain concise and deliberately curated." },
+  { connection: "COMPANION CONVERSATION", title: "The Conversation", description: "After the Pepsi story, Dan and his wife unpack the surprising connections, share reactions, and follow a few paths further.", action: "SUBSCRIBE TO LISTEN", featured: true },
+  { connection: "SHARED PERSON", title: "A related episode title", description: "A short explanation of the shared person, product, company, or event will live here.", action: "EXPLORE EPISODE" },
+  { connection: "SHARED PRODUCT", title: "A related episode title", description: "Each connection will be selected and explained during editorial review.", action: "EXPLORE EPISODE" },
+  { connection: "SHARED COMPANY", title: "A related episode title", description: "Listeners will be able to continue along a specific, meaningful path.", action: "EXPLORE EPISODE" },
+  { connection: "SHARED EVENT", title: "A related episode title", description: "This space will never recommend an episode without an explicit connection.", action: "EXPLORE EPISODE" },
+  { connection: "SHARED IDEA", title: "A related episode title", description: "Future cards will use their own episode artwork and destination link.", action: "EXPLORE EPISODE" },
 ] as const;
 
 
@@ -378,6 +378,12 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="sources-prompt" aria-labelledby="sources-prompt-title">
+        <div><span>SOURCES BEHIND THIS STORY</span><h2 id="sources-prompt-title">Follow the research.</h2></div>
+        <p>Books, articles, archives, recordings, and other material behind this episode will be gathered in its dedicated bibliography.</p>
+        <span className="sources-prompt-link">EPISODE BIBLIOGRAPHY <b>→</b><small>COMING SOON</small></span>
+      </section>
+
       <section className="activity-hour" aria-labelledby="activity-hour-title">
         <div className="activity-hour-heading">
           <span>ACTIVITY HOUR</span>
@@ -416,9 +422,9 @@ export default function Home() {
       <section className="related-episodes" aria-labelledby="related-episodes-title">
         <div className="related-episodes-intro"><span>KEEP FOLLOWING THE PATH</span><h2 id="related-episodes-title">Other Interconnected Episodes</h2><p>When this story shares a person, product, company, event, or idea with another episode, the next path begins here.</p></div>
         <div className="related-episode-grid">
-          {relatedEpisodePlaceholders.map((episode, index) => <article className="related-episode-card" key={episode.connection}>
+          {relatedEpisodePlaceholders.map((episode, index) => <article className={`related-episode-card ${episode.featured ? "companion-conversation" : ""}`} key={episode.connection}>
             <div className="related-episode-art"><img src="tracing-the-path-cover.jpg" alt="" /><span>{String(index + 1).padStart(2, "0")}</span></div>
-            <div><small>{episode.connection}</small><h3>{episode.title}</h3><p>{episode.description}</p><span className="related-episode-link">EXPLORE EPISODE <b>→</b></span></div>
+            <div><small>{episode.connection}</small><h3>{episode.title}</h3><p>{episode.description}</p><span className="related-episode-link">{episode.action} <b>→</b></span></div>
           </article>)}
         </div>
       </section>
