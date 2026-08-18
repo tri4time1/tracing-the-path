@@ -196,12 +196,6 @@ export default function Home() {
       <section className="episode-intro" id="top">
         <img src="pepsi-episode-art.jpg" alt="Episode artwork for When Pepsi Cracked the Iron Curtain" />
         <div>
-          <span>EPISODE 82 · A VISUAL LISTENING EDITION</span>
-          <div className="opening-rewind" aria-label="The story opens in 1959, then rewinds 196 years to 1763">
-            <span><small>THE HOOK</small><strong>1959</strong></span>
-            <i><b>←</b> REWIND 196 YEARS</i>
-            <span><small>THE STORY BEGINS</small><strong>1763</strong></span>
-          </div>
           <h1>What could Pepsi, videotape, and vodka possibly have in common?</h1>
           <p>Press play and watch Dan R. Morris’s answer assemble itself—every illustration begins as a faint watermark, then color and connections arrive as Dan tells the story.</p>
           <button onClick={() => { seek(0); togglePlay(); }}>{isPlaying ? "PAUSE THE STORY" : "PLAY & BUILD THE PATH"} <b>{isPlaying ? "Ⅱ" : "▶"}</b></button>
