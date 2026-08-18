@@ -54,7 +54,7 @@ button:focus-visible,a:focus-visible,select:focus-visible,input:focus-visible { 
 .episode-intro aside strong { font:500 28px Georgia,serif; margin:6px 0; }
 .episode-intro aside small { font-size:14px; line-height:1.45; color:var(--muted); max-width:210px; }
 
-.experience { min-height:1000px; display:grid; grid-template-columns:minmax(330px,31%) 1fr; border-bottom:2px solid var(--ink); }
+.experience { min-height:1000px; display:block; border-bottom:2px solid var(--ink); }
 .story-panel { padding:42px 3.2vw; border-right:2px solid var(--ink); display:flex; flex-direction:column; background:linear-gradient(155deg,#ead8b6,#dfc499); position:relative; }
 .episode-identity { display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(23,25,26,.45); padding-bottom:18px; margin-bottom:22px; }
 .episode-identity span { font-size:11px; letter-spacing:.15em; font-weight:800; color:var(--red); }
@@ -105,7 +105,8 @@ button:focus-visible,a:focus-visible,select:focus-visible,input:focus-visible { 
 .history-marker.current i { width:15px; height:15px; background:var(--red); border-color:#f4ead6; margin-top:4px; box-shadow:0 0 0 5px rgba(239,154,114,.18); }
 .history-marker.current:after { content:"NOW"; display:block; color:#ef9a72; font-size:8px; letter-spacing:.15em; margin-top:3px; }
 .map-heading { min-height:68px; flex:none; border-bottom:1px solid var(--line); display:flex; align-items:center; justify-content:space-between; gap:18px; padding:13px 26px; background:rgba(234,216,182,.55); }
-.map-heading>span { flex:1; font-size:11px; letter-spacing:.18em; font-weight:800; color:var(--red); }
+.map-heading>span { flex:1; font-size:12px; letter-spacing:.08em; font-weight:700; color:var(--ink); }
+.map-heading>span b { color:var(--red); font-size:10px; letter-spacing:.18em; margin-right:12px; }
 .map-heading small { font-size:11px; color:var(--muted); white-space:nowrap; }
 .drawing-status { display:flex; align-items:center; gap:8px; font-size:10px; letter-spacing:.13em; font-weight:800; color:var(--blue); white-space:nowrap; }
 .drawing-status i { width:8px; height:8px; border-radius:50%; background:var(--red); box-shadow:0 0 0 4px rgba(159,59,37,.12); animation:pulseInk 1.5s infinite; }
