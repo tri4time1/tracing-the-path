@@ -107,10 +107,6 @@ export default function Home() {
     } : node),
     [isCompactMap],
   );
-  const activeIllustrations = activeBeat.nodes
-    .map((nodeId) => nodes.find((node) => node.id === nodeId))
-    .filter((node) => node && revealedNodes.has(node.id));
-
   useEffect(() => {
     fetch("episode-82-transcript.json")
       .then((response) => response.json())
@@ -174,12 +170,6 @@ export default function Home() {
     requestAnimationFrame(() => mapPanelRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }));
   }
 
-  function focusIllustration(nodeId: string) {
-    setSelectedConnection(null);
-    setSelectedNode(nodeId);
-    requestAnimationFrame(() => mapPanelRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }));
-  }
-
   const focusedConnection = selectedConnection ?? latestConnection;
 
   return (
@@ -204,25 +194,9 @@ export default function Home() {
       </section>
 
       <section className="experience">
-        <aside className="story-panel">
-          <div className="episode-identity"><span>EPISODE {String(activeIndex + 1).padStart(2, "0")} / {storyBeats.length}</span><strong>{formatTime(activeBeat.time)}</strong></div>
-          <div className="eyebrow"><span>NOW TRACING</span><b>{activeBeat.year}</b></div>
-          <div className="beat-copy" key={activeBeat.title}>
-            <span className="beat-kicker">{activeBeat.kicker}</span>
-            <h2>{activeBeat.title}</h2>
-            <p>{activeBeat.description}</p>
-          </div>
-          <div className="beat-illustrations" aria-live="polite">
-            <span>ON THE MAP NOW</span>
-            {activeIllustrations.length ? <div>{activeIllustrations.map((node) => <button key={node!.id} onClick={() => focusIllustration(node!.id)}><img src={node!.image} alt="" loading="lazy" decoding="async" /><b>{node!.label}</b></button>)}</div> : <p>Keep listening—the next illustration will appear as Dan introduces it.</p>}
-          </div>
-          {activeBeat.route && <div className="route-card"><span>WHERE THE PATH MOVES</span><div><b>{activeBeat.route[0]}</b><i>→</i><b>{activeBeat.route[1]}</b></div></div>}
-          <div className="takeaway"><span>✦</span><p><strong>WHAT TO NOTICE</strong>{activeBeat.takeaway}</p></div>
-        </aside>
-
         <section ref={mapPanelRef} className="map-panel" aria-label="Animated story connection map">
           <HistoricalTimeline activeIndex={activeIndex} />
-          <div className="map-heading"><span>THE WHOLE PATH IS HERE—DAN REVEALS ITS MEANING</span><div className="drawing-status"><i />{isPlaying ? "BRINGING THE PATH TO LIFE" : "PRESS PLAY TO REVEAL"}</div><small>{nodes.length} watermark illustrations · {revealedConnections.length}/{connections.length} links</small></div>
+          <div className="map-heading"><span><b>NOW TRACING</b>{activeBeat.year} · {activeBeat.title}</span><div className="drawing-status"><i />{isPlaying ? "BRINGING THE PATH TO LIFE" : "PRESS PLAY TO REVEAL"}</div><small>{nodes.length} watermark illustrations · {revealedConnections.length}/{connections.length} links</small></div>
           <div className="map-canvas">
             <div className="paper-grid" />
             {connections.map((connection, index) => {
