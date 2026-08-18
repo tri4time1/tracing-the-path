@@ -110,7 +110,7 @@ export default function Home() {
   const revealedNodes = useMemo(
     () => new Set(
       nodes
-        .filter((node) => (node.firstSeen === 0 ? hasStarted : currentTime >= node.firstSeen))
+        .filter((node) => currentTime >= node.firstSeen)
         .map((node) => node.id),
     ),
     [currentTime, hasStarted],
@@ -227,6 +227,7 @@ export default function Home() {
                 style={{ left: `${cluster.x}%`, top: `${cluster.y}%`, width: `${cluster.width}%`, height: `${cluster.height}%` }}
               ><span>{cluster.title}</span></div>
             ))}
+            {!hasStarted && <div className="map-invitation" aria-hidden="true"><b>▶</b><span>PRESS PLAY</span><strong>Watch the interactive map come alive.</strong></div>}
             {connections.map((connection, index) => {
               const start = positionedNodes.find((node) => node.id === connection.from)!;
               const end = positionedNodes.find((node) => node.id === connection.to)!;
