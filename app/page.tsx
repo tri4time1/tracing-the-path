@@ -369,8 +369,6 @@ export default function Home() {
         <img className="host-cover" src="tracing-the-path-cover.jpg" alt="Tracing The Path podcast cover" />
       </section>
 
-      <footer><span>TRACING THE PATH</span><p>Hosted by Dan R. Morris · Everyday things. Extraordinary connections.</p><a href="https://podcasts.apple.com/us/podcast/tracing-the-path-the-connected-20th-century/id1476334630" target="_blank" rel="noreferrer">VIEW ON APPLE PODCASTS ↗</a></footer>
-
       {showGuide && <div className="modal-backdrop" role="button" tabIndex={0} aria-label="Close exploration guide" onKeyDown={(event) => { if (event.key === "Escape" || event.key === "Enter") setShowGuide(false); }} onClick={(event) => { if (event.target === event.currentTarget) setShowGuide(false); }}><div className="guide-modal" role="dialog" aria-modal="true" aria-labelledby="guide-title"><button onClick={() => setShowGuide(false)} aria-label="Close guide">×</button><span>HOW TO EXPLORE</span><h2 id="guide-title">Hear it. See it. Follow it.</h2><ol><li><b>01</b><p><strong>Press play</strong>Faint illustrations are already waiting; color arrives when Dan introduces them.</p></li><li><b>02</b><p><strong>Watch history time</strong>The upper timeline jumps backward and forward independently of the audio scrubber.</p></li><li><b>03</b><p><strong>Select the map</strong>Every illustration and connection can replay its own explanation.</p></li><li><b>04</b><p><strong>Explore the full path</strong>Return to any revealed illustration or line to replay its explanation.</p></li></ol><button className="start-button" onClick={() => { setShowGuide(false); seek(0, true); }}>START THE EPISODE →</button></div></div>}
     </main>
   );
