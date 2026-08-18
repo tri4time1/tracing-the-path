@@ -73,6 +73,34 @@ const storyPreviewSections = [
   },
 ] as const;
 
+
+const activityHourQuestions = [
+  {
+    question: "Why is the 1959 Kitchen Debate only the beginning of this story?",
+    answer: "The famous argument between Nixon and Khrushchev brings the episode’s threads together, but the American–Russian commercial relationship, recording technology, Pepsi, and Soviet vodka each have much older histories.",
+  },
+  {
+    question: "What problem did Pepsi solve with a barter agreement?",
+    answer: "Soviet rubles could not be freely exchanged for U.S. dollars. Barter let Pepsi trade concentrate for Soviet goods, including Stolichnaya vodka, rather than relying on conventional currency.",
+  },
+  {
+    question: "Why does Alexander Poniatoff matter to the Kitchen Debate?",
+    answer: "The Russian-born engineer founded Ampex, whose videotape technology recorded the encounter and helped carry the raw exchange to television audiences.",
+  },
+  {
+    question: "What does this episode suggest about everyday products and world events?",
+    answer: "A familiar drink, a recording machine, or a bottle of vodka can carry histories of migration, trade, politics, technology, and culture. Looking closely at one item can reveal a much larger path.",
+  },
+] as const;
+
+const activityHourGlossary = [
+  { term: "Barter", definition: "Trading goods or services directly instead of using money." },
+  { term: "Kitchen Debate", definition: "The 1959 exchange between Richard Nixon and Nikita Khrushchev at the American National Exhibition in Moscow." },
+  { term: "Ampex", definition: "A California company founded by Alexander Poniatoff that made pioneering videotape recorders." },
+  { term: "Stolichnaya", definition: "A vodka brand whose Soviet-era production later became part of Pepsi’s barter arrangement." },
+  { term: "Cultural exchange", definition: "Programs that move artists, ideas, performances, books, medical knowledge, and people between countries." },
+] as const;
+
 const storyCanvasPositions: Record<string, { x: number; y: number }> = {
   empire: { x: 9, y: 15 }, catherine: { x: 18, y: 15 }, fleet1863: { x: 27, y: 15 },
   singer: { x: 13, y: 28 }, lenin: { x: 24, y: 28 },
@@ -213,6 +241,12 @@ export default function Home() {
     if (audioRef.current) audioRef.current.playbackRate = rate;
   }
 
+  function printActivity(mode: "story" | "guide") {
+    document.body.dataset.printMode = mode;
+    window.print();
+    window.setTimeout(() => { delete document.body.dataset.printMode; }, 1000);
+  }
+
   function showBeatOnMap(index: number) {
     seek(storyBeats[index].time);
     setSelectedNode(null);
@@ -342,6 +376,41 @@ export default function Home() {
           <span>THE STORY CONTINUES</span>
           <p>The remaining chapters will follow this same reading format—bringing the audio, illustrations, historical details, and connections together as one edited narrative.</p>
         </div>
+      </section>
+
+      <section className="activity-hour" aria-labelledby="activity-hour-title">
+        <div className="activity-hour-heading">
+          <span>ACTIVITY HOUR</span>
+          <h2 id="activity-hour-title">Listen together. Remember together. Talk it through.</h2>
+          <p>Designed for a 40-minute episode followed by an unhurried conversation. Use the story as a read-along, then let the questions open the room.</p>
+        </div>
+        <div className="activity-print-actions">
+          <div><span>READY FOR THE ROOM</span><strong>Choose the version you need.</strong></div>
+          <div className="activity-buttons">
+            <button onClick={() => printActivity("story")}>PRINT THE STORY <b>↗</b></button>
+            <button onClick={() => printActivity("guide")}>PRINT ACTIVITY GUIDE <b>↗</b></button>
+          </div>
+        </div>
+        <div className="activity-content">
+          <section className="discussion-questions" aria-labelledby="discussion-title">
+            <div className="activity-section-heading"><span>DISCUSSION</span><h3 id="discussion-title">Questions for the group</h3></div>
+            <ol>
+              {activityHourQuestions.map((item, index) => <li key={item.question}><span>{String(index + 1).padStart(2, "0")}</span><p>{item.question}</p></li>)}
+            </ol>
+          </section>
+          <section className="facilitator-notes" aria-labelledby="facilitator-title">
+            <div className="activity-section-heading"><span>FOR THE FACILITATOR</span><h3 id="facilitator-title">Talking points</h3></div>
+            <ol>
+              {activityHourQuestions.map((item, index) => <li key={item.answer}><span>{String(index + 1).padStart(2, "0")}</span><p>{item.answer}</p></li>)}
+            </ol>
+          </section>
+        </div>
+        <section className="activity-glossary" aria-labelledby="glossary-title">
+          <div className="activity-section-heading"><span>GLOSSARY</span><h3 id="glossary-title">Words and ideas along the path</h3></div>
+          <dl>
+            {activityHourGlossary.map((item) => <div key={item.term}><dt>{item.term}</dt><dd>{item.definition}</dd></div>)}
+          </dl>
+        </section>
       </section>
 
       <section className="related-episodes" aria-labelledby="related-episodes-title">
