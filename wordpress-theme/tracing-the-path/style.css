@@ -1,0 +1,22 @@
+/*
+Theme Name: Tracing the Path
+Theme URI: https://tracingthepath.com/
+Author: Audience Industries
+Description: Custom episode-first WordPress theme for Tracing the Path.
+Version: 0.1.0
+Text Domain: tracing-the-path
+Requires at least: 6.6
+Requires PHP: 8.1
+*/
+
+:root {
+  --ttp-ink: #1e2522;
+  --ttp-paper: #ffffff;
+  --ttp-warm-paper: #f3e5cd;
+  --ttp-rust: #aa3e23;
+}
+
+body {
+  background: var(--ttp-paper);
+  color: var(--ttp-ink);
+}
