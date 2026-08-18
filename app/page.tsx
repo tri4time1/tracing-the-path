@@ -354,7 +354,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="host-feature">
+      <section className="host-feature" style={{ gridTemplateColumns: "minmax(300px, 1.1fr) minmax(320px, 1fr)" }}>
         <div className="host-photo-wrap"><img src="dan-r-morris.png" alt="Dan R. Morris, host of Tracing The Path" /><span>YOUR STORYTELLER</span></div>
         <div className="host-story"><span>THE VOICE BEHIND THE PATH</span><h2>Dan R. Morris</h2><h3>Award-winning storyteller. 20th-century historian. Tireless connector of dots.</h3><p>Dan begins with something familiar—a product, a person, a phrase—and follows the forgotten decisions that made it matter. This visual edition keeps his narration at the center while the history assembles around it.</p><a href="https://audienceindustries.com/about-tracing-the-path" target="_blank" rel="noreferrer">MEET DAN &amp; TRACING THE PATH ↗</a></div>
               </section>
