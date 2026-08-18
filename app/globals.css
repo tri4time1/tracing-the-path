@@ -434,3 +434,48 @@ footer a { margin-left:auto; color:var(--ink); font-size:11px; letter-spacing:.1
 @media (prefers-reduced-motion:reduce) {
   * { animation:none!important; transition:none!important; scroll-behavior:auto!important; }
 }
+
+
+/* Editorial reading prototype: the eventual WordPress prose structure. */
+.the-story { padding:96px 6vw 110px; background:var(--cream-2); border-top:2px solid var(--ink); }
+.the-story-heading { display:grid; grid-template-columns:minmax(0,1fr) minmax(280px,.72fr); gap:18px 9vw; align-items:end; max-width:1280px; margin:0 auto 62px; }
+.the-story-heading>span,.path-ahead>span,.story-continues>span { color:var(--red); font-size:11px; letter-spacing:.18em; font-weight:800; }
+.the-story-heading>span { grid-column:1/-1; }
+.the-story-heading h2 { margin:0; font:400 clamp(42px,4.6vw,72px)/.96 Georgia,serif; letter-spacing:-.04em; max-width:680px; }
+.the-story-heading p { margin:0; font:400 19px/1.6 Georgia,serif; color:#555a55; max-width:500px; }
+.story-reading { max-width:1120px; margin:0 auto; }
+.story-section { display:grid; grid-template-columns:146px minmax(0,1fr); column-gap:5vw; padding:0 0 56px; margin-bottom:55px; border-bottom:1px solid rgba(23,25,26,.45); }
+.story-section-marker { padding-top:4px; }
+.story-section-marker>span { display:block; color:var(--red); font:600 35px/.9 Georgia,serif; }
+.story-section-marker time { display:block; margin-top:9px; font-size:11px; font-weight:800; letter-spacing:.12em; color:var(--muted); }
+.story-section-marker button { margin-top:20px; padding:0; border:0; background:none; color:var(--ink); font-size:10px; letter-spacing:.1em; font-weight:800; text-align:left; cursor:pointer; }
+.story-section-marker button b { color:var(--red); font-size:17px; margin-left:4px; }
+.story-section-marker button:hover,.story-section-marker button:focus-visible { color:var(--red); text-decoration:underline; }
+.story-section-copy { display:grid; grid-template-columns:136px minmax(0,1fr); gap:28px; }
+.story-section-copy>img { width:136px; height:136px; object-fit:cover; border:2px solid var(--ink); background:var(--paper); box-shadow:5px 5px 0 rgba(159,59,37,.32); filter:sepia(.14) saturate(.88); }
+.story-section-copy>div>span { color:var(--red); display:block; font-size:11px; letter-spacing:.15em; font-weight:800; margin:2px 0 11px; }
+.story-section-copy h3 { margin:0 0 20px; font:500 clamp(30px,3.1vw,48px)/1 Georgia,serif; letter-spacing:-.028em; }
+.story-section-copy p { max-width:670px; margin:0 0 17px; font:400 18px/1.66 Georgia,serif; color:#3f433f; }
+.path-ahead { grid-column:2; margin-top:30px; padding:19px 22px 20px; border-left:5px solid var(--red); background:#e7d3ad; max-width:720px; }
+.path-ahead p { margin:8px 0 0; font:italic 18px/1.5 Georgia,serif; color:#414440; }
+.story-continues { max-width:1120px; margin:0 auto; padding:30px 0 0 146px; }
+.story-continues p { max-width:600px; margin:10px 0 0; font:400 18px/1.6 Georgia,serif; color:#555a55; }
+
+@media (max-width:700px) {
+  .the-story { padding:68px 24px 76px; }
+  .the-story-heading { display:block; margin-bottom:42px; }
+  .the-story-heading>span { display:block; margin-bottom:14px; }
+  .the-story-heading p { font-size:17px; margin-top:18px; }
+  .story-section { display:block; padding-bottom:42px; margin-bottom:42px; }
+  .story-section-marker { display:flex; align-items:center; gap:12px; margin-bottom:21px; }
+  .story-section-marker>span { font-size:29px; }
+  .story-section-marker time { margin:0; }
+  .story-section-marker button { margin:0 0 0 auto; font-size:9px; }
+  .story-section-copy { display:block; }
+  .story-section-copy>img { width:104px; height:104px; float:right; margin:0 0 14px 18px; }
+  .story-section-copy h3 { font-size:34px; }
+  .story-section-copy p { font-size:17px; line-height:1.6; }
+  .path-ahead { clear:both; margin-top:24px; padding:17px 18px; }
+  .path-ahead p { font-size:17px; }
+  .story-continues { padding-left:0; }
+}
