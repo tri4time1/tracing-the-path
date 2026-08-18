@@ -27,6 +27,52 @@ const relatedEpisodePlaceholders = [
   { connection: "SHARED MOMENT", title: "A related episode title", description: "The final selection can remain concise and deliberately curated." },
 ] as const;
 
+
+const storyPreviewSections = [
+  {
+    chapter: "01",
+    time: 0,
+    timestamp: "0:00",
+    kicker: "THE OPENING RIDDLE",
+    title: "What connects videotape, vodka, and Pepsi?",
+    image: "sketch-ampex-videotape.png",
+    imageAlt: "Illustration of an Ampex videotape machine",
+    paragraphs: [
+      "Start in a model American kitchen in Moscow, in the summer of 1959. Vice President Richard Nixon and Soviet leader Nikita Khrushchev are arguing over the promise of their competing systems. It is a scene familiar enough to have a name: the Kitchen Debate.",
+      "But Dan asks us to stop looking only at the two men. Nearby are a cup of Pepsi, a new videotape machine, and a country whose vodka will soon become part of an extraordinary trade. The story is not really about one debate. It is about the long and surprising paths that brought all of those things into the same room.",
+    ],
+    ahead: "Before the Cold War made the United States and Russia appear permanently opposed, merchants were already finding reasons to cross the Atlantic.",
+  },
+  {
+    chapter: "02",
+    time: 58,
+    timestamp: "0:58",
+    kicker: "THE FIRST BRIDGE",
+    title: "Catherine the Great keeps trade open",
+    image: "sketch-catherine-the-great.jpg",
+    imageAlt: "Illustration of Catherine the Great",
+    paragraphs: [
+      "To find the first thread, Dan travels back to 1763. American merchants were beginning to reach St. Petersburg with goods from the Caribbean and the colonies, while Russia was deciding how it would position itself among the powers of Europe.",
+      "Catherine the Great saw an advantage in leaving room for a new trading partner. Her choice helped create a commercial relationship built on cargo, calculation, and mutual benefit—long before either nation imagined the ideological conflict that would later define the century.",
+    ],
+    ahead: "Trade creates a route. A century later, Russian ships and American companies will turn that route into something much larger.",
+  },
+  {
+    chapter: "03",
+    time: 166,
+    timestamp: "2:46",
+    kicker: "SHIPS BECOME STOREFRONTS",
+    title: "A naval visit grows into a commercial corridor",
+    image: "sketch-russian-fleet-1863.jpg",
+    imageAlt: "Illustration of the Russian fleet visit of 1863",
+    paragraphs: [
+      "In 1863, Russian ships arrived in New York and San Francisco during the American Civil War. The visit carried political meaning, but it also helped make a relationship between the two countries feel possible and tangible.",
+      "Over the decades that followed, commerce filled in the route. Alaska changed hands. American firms—including Singer and Westinghouse—built major operations in Russia. By 1912, Singer was so familiar that its name could stand in for a sewing machine itself. The pathway that will eventually lead to Pepsi in Moscow begins as a remarkably ordinary story: products moving where people can use them.",
+    ],
+    ahead: "That commercial corridor will not stay open. Revolution will redraw the rules—and transform a familiar Russian product into Stolichnaya.",
+  },
+] as const;
+
 const storyCanvasPositions: Record<string, { x: number; y: number }> = {
   empire: { x: 9, y: 15 }, catherine: { x: 18, y: 15 }, fleet1863: { x: 27, y: 15 },
   singer: { x: 13, y: 28 }, lenin: { x: 24, y: 28 },
@@ -272,19 +318,38 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="journey">
-        <div className="journey-intro"><span>THE EPISODE, CHAPTER BY CHAPTER</span><h2>Jump anywhere without losing the path.</h2></div>
-        <p className="journey-lede">Each chapter now comes directly from the timestamped transcript. Choosing one returns you to the map, moves historical time, and cues the audio.</p>
-        <div className="chapter-grid">
-          {storyBeats.map((beat, i) => {
-            const beatNodes = beat.nodes.map((nodeId) => nodes.find((node) => node.id === nodeId)).filter(Boolean);
-            return <button key={beat.time} onClick={() => showBeatOnMap(i)} className={`chapter-card ${i === activeIndex ? "active" : ""}`} aria-pressed={i === activeIndex}>
-              <span className="chapter-card-top"><b>{String(i + 1).padStart(2, "0")}</b><small>{formatTime(beat.time)} · {beat.year}</small></span>
-              <span className="chapter-art" aria-hidden="true">{beatNodes.slice(0, 4).map((node) => <img key={node!.id} src={node!.image} alt="" loading="lazy" decoding="async" />)}</span>
-              <span className="chapter-kicker">{beat.kicker}</span><strong>{beat.title}</strong><p>{beat.description}</p>
-              <span className="chapter-action">{i === activeIndex ? "VIEWING ON MAP" : "JUMP TO MAP"}<b>↑</b></span>
-            </button>;
-          })}
+      <section className="the-story" aria-labelledby="the-story-title">
+        <div className="the-story-heading">
+          <span>THE STORY</span>
+          <h2 id="the-story-title">The paths behind one photograph.</h2>
+          <p>Read the episode as a connected historical story, or jump into the audio at any point. This is the editorial reading experience that will ultimately live on every episode page.</p>
+        </div>
+        <div className="story-reading">
+          {storyPreviewSections.map((section) => (
+            <article className="story-section" key={section.chapter}>
+              <div className="story-section-marker">
+                <span>{section.chapter}</span>
+                <time>{section.timestamp}</time>
+                <button onClick={() => seek(section.time, true)}>LISTEN FROM HERE <b>→</b></button>
+              </div>
+              <div className="story-section-copy">
+                <img src={section.image} alt={section.imageAlt} />
+                <div>
+                  <span>{section.kicker}</span>
+                  <h3>{section.title}</h3>
+                  {section.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+                </div>
+              </div>
+              <aside className="path-ahead">
+                <span>AHEAD ON THE PATH</span>
+                <p>{section.ahead}</p>
+              </aside>
+            </article>
+          ))}
+        </div>
+        <div className="story-continues">
+          <span>THE STORY CONTINUES</span>
+          <p>The remaining chapters will follow this same reading format—bringing the audio, illustrations, historical details, and connections together as one edited narrative.</p>
         </div>
       </section>
 
