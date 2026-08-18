@@ -18,6 +18,15 @@ const storyCanvasClusters = [
   { id: "afterlife", title: "THE DEAL'S AFTERLIFE", x: 47, y: 56, width: 49, height: 34 },
 ] as const;
 
+const relatedEpisodePlaceholders = [
+  { connection: "SHARED PERSON", title: "A related episode title", description: "A short explanation of the shared person, product, company, or event will live here." },
+  { connection: "SHARED PRODUCT", title: "A related episode title", description: "Each connection will be selected and explained during editorial review." },
+  { connection: "SHARED COMPANY", title: "A related episode title", description: "Listeners will be able to continue along a specific, meaningful path." },
+  { connection: "SHARED EVENT", title: "A related episode title", description: "This space will never recommend an episode without an explicit connection." },
+  { connection: "SHARED IDEA", title: "A related episode title", description: "Future cards will use their own episode artwork and destination link." },
+  { connection: "SHARED MOMENT", title: "A related episode title", description: "The final selection can remain concise and deliberately curated." },
+] as const;
+
 const storyCanvasPositions: Record<string, { x: number; y: number }> = {
   empire: { x: 9, y: 15 }, catherine: { x: 18, y: 15 }, fleet1863: { x: 27, y: 15 },
   singer: { x: 13, y: 28 }, lenin: { x: 24, y: 28 },
@@ -276,6 +285,16 @@ export default function Home() {
               <span className="chapter-action">{i === activeIndex ? "VIEWING ON MAP" : "JUMP TO MAP"}<b>↑</b></span>
             </button>;
           })}
+        </div>
+      </section>
+
+      <section className="related-episodes" aria-labelledby="related-episodes-title">
+        <div className="related-episodes-intro"><span>KEEP FOLLOWING THE PATH</span><h2 id="related-episodes-title">Other Interconnected Episodes</h2><p>When this story shares a person, product, company, event, or idea with another episode, the next path begins here.</p></div>
+        <div className="related-episode-grid">
+          {relatedEpisodePlaceholders.map((episode, index) => <article className="related-episode-card" key={episode.connection}>
+            <div className="related-episode-art"><img src="tracing-the-path-cover.jpg" alt="" /><span>{String(index + 1).padStart(2, "0")}</span></div>
+            <div><small>{episode.connection}</small><h3>{episode.title}</h3><p>{episode.description}</p><span className="related-episode-link">EXPLORE EPISODE <b>→</b></span></div>
+          </article>)}
         </div>
       </section>
 
