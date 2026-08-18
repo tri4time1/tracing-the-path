@@ -1,0 +1,35 @@
+name: Deploy WordPress theme to staging
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'wordpress-theme/tracing-the-path/**'
+      - '.github/workflows/deploy-staging-theme.yml'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Deploy theme
+    runs-on: ubuntu-latest
+    env:
+      FTP_HOST: ${{ secrets.TTP_STAGING_FTP_HOST }}
+      FTP_USERNAME: ${{ secrets.TTP_STAGING_FTP_USERNAME }}
+      FTP_PASSWORD: ${{ secrets.TTP_STAGING_FTP_PASSWORD }}
+    if: ${{ env.FTP_HOST != '' && env.FTP_USERNAME != '' && env.FTP_PASSWORD != '' }}
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Upload theme files
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ env.FTP_HOST }}
+          username: ${{ env.FTP_USERNAME }}
+          password: ${{ env.FTP_PASSWORD }}
+          local-dir: wordpress-theme/tracing-the-path/
+          server-dir: /
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
