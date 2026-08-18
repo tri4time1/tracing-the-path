@@ -223,15 +223,6 @@ export default function Home() {
 
   return (
     <main>
-      <header className="topbar">
-        <a className="brand" href="#top" aria-label="Tracing The Path home">
-          <img className="brand-cover" src="tracing-the-path-cover.jpg" alt="" />
-          <span><strong>TRACING THE PATH</strong><small>THE INTER-CONNECTED 20TH CENTURY</small></span>
-        </a>
-        <div className="host-chip"><img src="dan-r-morris.png" alt="" /><span>HOSTED &amp; NARRATED BY<strong>DAN R. MORRIS</strong></span></div>
-        <button className="about-button" onClick={() => setShowGuide(true)}>HOW TO EXPLORE <span>↗</span></button>
-      </header>
-
       <section className="episode-intro" id="top">
         <img src="pepsi-episode-art.jpg" alt="Episode artwork for When Pepsi Cracked the Iron Curtain" />
         <div>
