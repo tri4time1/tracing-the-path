@@ -278,11 +278,6 @@ button:focus-visible,a:focus-visible,select:focus-visible,input:focus-visible { 
 .host-story p { font:400 17px/1.65 Georgia,serif; color:#c9c8be; max-width:560px; }
 .host-story a { display:inline-block; color:white; border-bottom:1px solid var(--red); text-decoration:none; margin-top:20px; padding-bottom:7px; font-size:11px; letter-spacing:.13em; font-weight:800; }
 .host-cover { width:210px; height:210px; object-fit:cover; align-self:center; justify-self:center; border-radius:50%; box-shadow:11px 11px 0 var(--red); border:3px solid #e8d3ad; }
-footer { min-height:100px; background:#dfc499; display:flex; align-items:center; gap:30px; padding:24px 4vw; border-top:2px solid var(--ink); }
-footer>span { font:700 15px Georgia,serif; letter-spacing:.1em; }
-footer p { font-size:15px; color:#59564f; }
-footer a { margin-left:auto; color:var(--ink); font-size:11px; letter-spacing:.1em; font-weight:800; text-decoration:none; }
-
 .modal-backdrop { position:fixed; inset:0; z-index:50; background:rgba(17,20,18,.72); display:grid; place-items:center; padding:20px; }
 .guide-modal { width:min(560px,100%); background:var(--cream); padding:45px; position:relative; box-shadow:12px 12px 0 var(--red); }
 .guide-modal>button:first-child { position:absolute; top:11px; right:17px; border:0; background:none; font-size:28px; cursor:pointer; }
