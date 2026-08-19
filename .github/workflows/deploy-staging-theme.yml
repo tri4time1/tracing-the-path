@@ -8,27 +8,35 @@ on:
       - '.github/workflows/deploy-staging-theme.yml'
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   deploy:
     name: Deploy theme
     runs-on: ubuntu-latest
-    env:
-      FTP_HOST: ${{ secrets.TTP_STAGING_FTP_HOST }}
-      FTP_USERNAME: ${{ secrets.TTP_STAGING_FTP_USERNAME }}
-      FTP_PASSWORD: ${{ secrets.TTP_STAGING_FTP_PASSWORD }}
     steps:
       - name: Check out source
         uses: actions/checkout@v4
 
+      - name: Configure verified SFTP connection
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.TTP_STAGING_SSH_PRIVATE_KEY }}
+          KNOWN_HOSTS: ${{ secrets.TTP_STAGING_SFTP_KNOWN_HOSTS }}
+        run: |
+          install -d -m 700 ~/.ssh
+          printf '%s\n' "$SSH_PRIVATE_KEY" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          printf '%s\n' "$KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+
       - name: Upload theme files
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ env.FTP_HOST }}
-          username: ${{ env.FTP_USERNAME }}
-          password: ${{ env.FTP_PASSWORD }}
-          local-dir: wordpress-theme/tracing-the-path/
-          server-dir: /
-          exclude: |
-            **/.git*
-            **/.git*/**
-            **/node_modules/**
+        env:
+          SFTP_HOST: ${{ secrets.TTP_STAGING_SFTP_HOST }}
+          SFTP_PORT: ${{ secrets.TTP_STAGING_SFTP_PORT }}
+          SFTP_USER: ${{ secrets.TTP_STAGING_SFTP_USER }}
+        run: |
+          sftp -b - -o StrictHostKeyChecking=yes -o UserKnownHostsFile=~/.ssh/known_hosts \
+            -P "$SFTP_PORT" "$SFTP_USER@$SFTP_HOST" <<'EOF'
+          put -r wordpress-theme/tracing-the-path/* .
+          EOF
