@@ -36,7 +36,7 @@ jobs:
           SFTP_PORT: ${{ secrets.TTP_STAGING_SFTP_PORT }}
           SFTP_USER: ${{ secrets.TTP_STAGING_SFTP_USER }}
         run: |
-          sftp -b - -o StrictHostKeyChecking=yes -o UserKnownHostsFile=~/.ssh/known_hosts \
+          sftp -b - -i ~/.ssh/id_ed25519 -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=~/.ssh/known_hosts \
             -P "$SFTP_PORT" "$SFTP_USER@$SFTP_HOST" <<'EOF'
           put -r wordpress-theme/tracing-the-path/* .
           EOF
