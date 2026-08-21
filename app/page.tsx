@@ -246,12 +246,6 @@ export default function Home() {
     window.setTimeout(() => { delete document.body.dataset.printMode; }, 1000);
   }
 
-  function showBeatOnMap(index: number) {
-    seek(storyBeats[index].time);
-    setSelectedNode(null);
-    requestAnimationFrame(() => mapPanelRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }));
-  }
-
   const focusedConnection = selectedConnection ?? latestConnection;
 
   return (

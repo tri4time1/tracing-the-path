@@ -19,6 +19,7 @@
 html { scroll-behavior:smooth; }
 body { margin:0; background:var(--white); color:var(--ink); font-family:Arial,sans-serif; font-size:17px; }
 button,a,select { font:inherit; }
+
 button { color:inherit; }
 button:focus-visible,a:focus-visible,select:focus-visible,input:focus-visible { outline:3px solid #e76d4e; outline-offset:3px; }
 
@@ -557,6 +558,11 @@ button:focus-visible,a:focus-visible,select:focus-visible,input:focus-visible { 
 .related-episode-card.companion-conversation p { max-width:550px; color:#ded9cf; font-size:16px; }
 .related-episode-card.companion-conversation .related-episode-link { color:var(--cream); }
 .related-episode-card.companion-conversation .related-episode-link b { color:#e8a47f; }
+
+@media (max-width:900px) {
+  .sources-prompt { grid-template-columns:minmax(0,.9fr) minmax(0,1fr); }
+  .sources-prompt-link { grid-column:1/-1; }
+}
 
 @media (max-width:700px) {
   .sources-prompt { display:block; padding:38px 24px; }
