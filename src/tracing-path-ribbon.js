@@ -47,6 +47,7 @@ class TracingPathRibbon extends HTMLElement {
     const leftAnchor = { x:-90, y:156, z:-5 };
     const rightAnchor = { x:1290, y:145, z:10 };
     const dateSpacing = 118;
+    const historicalDates = Array.from({ length:28 }, (_, index) => 1760 + index * 10);
     const dateSlots = Array.from({length:14},() => {
       const group=document.createElementNS("http://www.w3.org/2000/svg","g");
       const dot=document.createElementNS("http://www.w3.org/2000/svg","circle");
@@ -138,10 +139,10 @@ class TracingPathRibbon extends HTMLElement {
       dateSlots.forEach((slot,i) => {
         const logical=i-1;
         const x=logical*dateSpacing-dateRemainder;
-        const sequence=((dateIndex+logical)%41+41)%41;
+        const sequence=((dateIndex+logical)%historicalDates.length+historicalDates.length)%historicalDates.length;
         slot.group.setAttribute("transform",`translate(${x.toFixed(2)} 0)`);
         slot.dot.setAttribute("cx",String(-dateSpacing/2));slot.label.setAttribute("x","0");
-        slot.label.textContent=String(1900+sequence*5);
+        slot.label.textContent=String(historicalDates[sequence]);
       });
       const depthOrder=[];
       segmentEls.forEach((el,i) => {
