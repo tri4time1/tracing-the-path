@@ -9,6 +9,7 @@ import {
   storyBeats,
   type StoryConnection,
 } from "./episode-data";
+import { SiteHeader, SubscribeAndFooter } from "./site-chrome";
 
 const storyCanvasClusters = [
   { id: "trade", title: "THE LONG COMMERCIAL PRELUDE", x: 3, y: 4, width: 29, height: 29 },
@@ -157,6 +158,8 @@ function HistoricalTimeline({ activeIndex }: { activeIndex: number }) {
 }
 
 export default function Home() {
+  const base = import.meta.env.BASE_URL;
+  const episode = `${base}episode.html`;
   const audioRef = useRef<HTMLAudioElement>(null);
   const mapPanelRef = useRef<HTMLElement>(null);
   const [currentTime, setCurrentTime] = useState(0);
@@ -249,7 +252,9 @@ export default function Home() {
   const focusedConnection = selectedConnection ?? latestConnection;
 
   return (
-    <main>
+    <div className="site-episode">
+      <SiteHeader base={base} />
+      <main>
       <section className="episode-intro" id="top">
         <img src="pepsi-episode-art.jpg" alt="Episode artwork for When Pepsi Cracked the Iron Curtain" />
         <div>
@@ -428,6 +433,8 @@ export default function Home() {
               </section>
 
       {showGuide && <div className="modal-backdrop" role="button" tabIndex={0} aria-label="Close exploration guide" onKeyDown={(event) => { if (event.key === "Escape" || event.key === "Enter") setShowGuide(false); }} onClick={(event) => { if (event.target === event.currentTarget) setShowGuide(false); }}><div className="guide-modal" role="dialog" aria-modal="true" aria-labelledby="guide-title"><button onClick={() => setShowGuide(false)} aria-label="Close guide">×</button><span>HOW TO EXPLORE</span><h2 id="guide-title">Hear it. See it. Follow it.</h2><ol><li><b>01</b><p><strong>Press play</strong>Faint illustrations are already waiting; color arrives when Dan introduces them.</p></li><li><b>02</b><p><strong>Watch history time</strong>The upper timeline jumps backward and forward independently of the audio scrubber.</p></li><li><b>03</b><p><strong>Select the map</strong>Every illustration and connection can replay its own explanation.</p></li><li><b>04</b><p><strong>Explore the full path</strong>Return to any revealed illustration or line to replay its explanation.</p></li></ol><button className="start-button" onClick={() => { setShowGuide(false); seek(0, true); }}>START THE EPISODE →</button></div></div>}
-    </main>
+      </main>
+      <SubscribeAndFooter base={base} episode={episode} />
+    </div>
   );
 }
