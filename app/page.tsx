@@ -1,6 +1,6 @@
 "use client";
 
-import { createElement, useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   AUDIO_URL,
   DURATION,
@@ -250,9 +250,6 @@ export default function Home() {
 
   return (
     <main>
-      <section className="homepage-ribbon" aria-label="Tracing the path through time">
-        {createElement("tracing-path-ribbon")}
-      </section>
       <section className="episode-intro" id="top">
         <img src="pepsi-episode-art.jpg" alt="Episode artwork for When Pepsi Cracked the Iron Curtain" />
         <div>
