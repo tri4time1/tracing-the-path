@@ -12,6 +12,7 @@ export default defineConfig({
       input: {
         home: resolve(import.meta.dirname, "index.html"),
         episode: resolve(import.meta.dirname, "episode.html"),
+        article: resolve(import.meta.dirname, "article.html"),
       },
     },
   },
