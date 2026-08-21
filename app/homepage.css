@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Space+Grotesk:wght@500;600;700&display=swap");
 
 .site-home { --home-black:#050505; --home-white:#f8f7f2; --home-paper:#e8caa0; --home-navy:#082b3b; --home-rust:#a93622; --home-gold:#d8af72; background:var(--home-white); color:var(--home-black); font-family:"DM Sans",Arial,sans-serif; overflow:hidden; }
+.site-episode { --home-black:#050505; --home-white:#f8f7f2; --home-paper:#e8caa0; --home-navy:#082b3b; --home-rust:#a93622; --home-gold:#d8af72; background:var(--home-white); color:var(--home-black); overflow:hidden; }
 .site-home * { box-sizing:border-box; }
 .site-home a { color:inherit; }
 .site-header { min-height:72px; display:grid; grid-template-columns:minmax(230px,1.4fr) auto minmax(130px,1.4fr); align-items:center; gap:28px; padding:12px clamp(20px,4vw,64px); background:var(--home-black); color:#fff; }
