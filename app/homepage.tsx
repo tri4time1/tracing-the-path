@@ -4,6 +4,7 @@ import { SiteHeader, SubscribeAndFooter } from "./site-chrome";
 export default function Homepage() {
   const base = import.meta.env.BASE_URL;
   const episode = `${base}episode.html`;
+  const article = `${base}article.html`;
 
   return (
     <div className="site-home">
@@ -65,7 +66,7 @@ export default function Homepage() {
         <section className="article-preview" id="articles" aria-labelledby="articles-title">
           <div className="section-heading-row"><div><p className="home-eyebrow">FROM THE ARCHIVE</p><h2 id="articles-title">Recent Articles</h2></div><span>New writing will appear here.</span></div>
           <div className="article-grid">
-            <article><span>COMING SOON</span><h3>Behind the stories</h3><p>Notes, overlooked details, and the research paths that continue beyond an episode.</p></article>
+            <article><span>ARTICLE TEMPLATE</span><h3>Behind the stories</h3><p>See how a longer article will read and how it can lead into related articles and episodes.</p><a href={article} className="home-text-link">READ SAMPLE ARTICLE <b>→</b></a></article>
             <article><span>COMING SOON</span><h3>The cutting room floor</h3><p>Facts and surprises Dan discovered but could not fit into the final story.</p></article>
             <article><span>COMING SOON</span><h3>Follow another path</h3><p>Connections between episodes, people, products, and moments in history.</p></article>
           </div>
