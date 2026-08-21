@@ -19,6 +19,23 @@
 html { scroll-behavior:smooth; }
 body { margin:0; background:var(--white); color:var(--ink); font-family:Arial,sans-serif; font-size:17px; }
 button,a,select { font:inherit; }
+/* Homepage visual: the custom element owns its animation and reduced-motion behavior. */
+.homepage-ribbon {
+  width:100%;
+  overflow:hidden;
+  background:var(--white);
+  padding:clamp(20px,3vw,44px) 5vw clamp(10px,1.75vw,28px);
+}
+.homepage-ribbon tracing-path-ribbon {
+  display:block;
+  width:100%;
+  max-width:1440px;
+  margin:0 auto;
+}
+@media (max-width:700px) {
+  .homepage-ribbon { padding:20px 24px 8px; }
+}
+
 button { color:inherit; }
 button:focus-visible,a:focus-visible,select:focus-visible,input:focus-visible { outline:3px solid #e76d4e; outline-offset:3px; }
 
